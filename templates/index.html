@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="text-center mt-5 hero-section py-5">
+  <div class="container">
+    <h1 class="display-4 fw-bold">Book Appointments with Top Doctors</h1>
+    <p class="lead mb-4">Fast, secure, and reliable online doctor appointment system.</p>
+    {% if 'user_id' in session %}
+      <a href="{{ url_for('dashboard') }}" class="btn btn-success btn-lg me-2 mb-2">Go to Dashboard</a>
+      <a href="{{ url_for('logout') }}" class="btn btn-danger btn-lg mb-2">Logout</a>
+    {% else %}
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2 mb-2">Login</a>
+      <a href="{{ url_for('register') }}" class="btn btn-secondary btn-lg mb-2">Register</a>
+    {% endif %}
+  </div>
+</section>
+
+<!-- FEATURED DOCTORS -->
+<section class="mt-5 mb-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Featured Doctors</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for doc in doctors %}
+      <div class="col">
+        <div class="card-doctor text-center p-4">
+          <!-- Optional icon -->
+          <div class="mb-3">
+            <i class="bi bi-person-circle fs-1 text-primary"></i>
+          </div>
+          <h5>{{ doc.name }}</h5>
+          <p class="text-muted">{{ doc.specialization }}</p>
+          {% if 'user_id' in session %}
+            <a href="{{ url_for('book') }}" class="btn btn-primary btn-sm mt-2">Book Appointment</a>
+          {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-secondary btn-sm mt-2">Login to Book</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

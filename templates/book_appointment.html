@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Book Appointment</h2>
+  <form method="POST" class="needs-validation" novalidate>
+    <!-- SELECT DOCTOR -->
+    <div class="mb-3">
+  <label for="doctor" class="form-label">Choose Doctor</label>
+  <select name="doctor_id" id="doctor" class="form-select" required>
+    <option value="">Select a doctor</option>
+    {% for doc in doctors %}
+      <option value="{{ doc.id }}"
+        {% if preselected_doctor_id and preselected_doctor_id == doc.id %} selected {% endif %}>
+        {{ doc.name }} - {{ doc.specialization }}
+      </option>
+    {% endfor %}
+</select>
+  <div class="invalid-feedback">Please select a doctor.</div>
+</div>
+
+
+    <!-- SELECT DATE -->
+    <div class="mb-3">
+      <label for="date" class="form-label">Select Date</label>
+      <input
+        type="text"
+        id="date"
+        name="date"
+        class="form-control"
+        placeholder="Choose a date"
+        required
+      />
+      <div class="invalid-feedback">Please select a date.</div>
+    </div>
+
+    <!-- SELECT TIME SLOT -->
+    <div class="mb-3">
+      <label for="time" class="form-label">Select Time Slot</label>
+      <select name="time" id="time" class="form-select" required>
+        <option value="">Select a time slot</option>
+        <option value="09:00 AM">09:00 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+        <option value="02:00 PM">02:00 PM</option>
+        <option value="03:00 PM">03:00 PM</option>
+        <option value="04:00 PM">04:00 PM</option>
+      </select>
+      <div class="invalid-feedback">Please select a time slot.</div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-lg mt-3">
+      Book Appointment
+    </button>
+  </form>
+</div>
+
+<!-- Initialize Flatpickr -->
+<script>
+  flatpickr("#date", {
+    minDate: "today",
+    dateFormat: "Y-m-d",
+  });
+</script>
+{% endblock %}

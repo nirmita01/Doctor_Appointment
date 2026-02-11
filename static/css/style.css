@@ -1,0 +1,62 @@
+/* General body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+/* Navbar customization */
+.navbar {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Home page hero section */
+.text-center h1 {
+    font-size: 3rem;
+    color: #0d6efd; /* Bootstrap primary blue */
+    margin-bottom: 20px;
+}
+
+.text-center p.lead {
+    font-size: 1.5rem;
+    color: #495057;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.btn-lg {
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+    margin: 5px;
+    transition: 0.3s ease;
+}
+
+.btn-lg:hover {
+    transform: scale(1.05);
+}
+
+/* Forms */
+form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Tables */
+.table {
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Flash messages */
+.alert {
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+/* Footer or extra spacing */
+.mt-5 {
+    margin-top: 4rem !important;
+}
