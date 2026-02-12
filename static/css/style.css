@@ -1,62 +1,192 @@
-/* General body styling */
+/* -------------------- GENERAL -------------------- */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-/* Navbar customization */
-.navbar {
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+/* -------------------- NAVBAR -------------------- */
+.navbar-brand {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: 700;
 }
-
-/* Home page hero section */
-.text-center h1 {
-    font-size: 3rem;
-    color: #0d6efd; /* Bootstrap primary blue */
-    margin-bottom: 20px;
-}
-
-.text-center p.lead {
-    font-size: 1.5rem;
-    color: #495057;
-    margin-bottom: 30px;
-}
-
-/* Buttons */
-.btn-lg {
-    padding: 0.75rem 2rem;
-    font-size: 1.2rem;
-    margin: 5px;
+.navbar-nav .nav-link {
+    font-weight: 500;
     transition: 0.3s ease;
 }
+.navbar-nav .nav-link:hover {
+    color: #d134b4;
+}
 
+/* -------------------- HERO / INDEX -------------------- */
+section.text-center {
+    background: linear-gradient(135deg, #0d6efd, #6c63ff);
+    color: white;
+    padding: 80px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    margin-bottom: 50px;
+}
+section.text-center h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+section.text-center p.lead {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+}
+.btn-lg {
+    padding: 0.8rem 2.2rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
 .btn-lg:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Forms */
+/* -------------------- FORMS -------------------- */
 form {
-    background: #ffffff;
+    background: #fff;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+form:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+input, select {
+    border-radius: 8px;
 }
 
-/* Tables */
+/* -------------------- TABLES -------------------- */
 .table {
-    background: #ffffff;
-    border-radius: 10px;
+    background: #fff;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+.table th {
+    background-color: #0d6efd;
+    color: #fff;
+    text-align: center;
+}
+.table td {
+    text-align: center;
+}
+.table tr:hover {
+    background-color: #e9f2ff;
+    transform: scale(1.01);
 }
 
-/* Flash messages */
+/* -------------------- DASHBOARD / DOCTOR CARDS -------------------- */
+.card-doctor {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+.card-doctor:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+.card-doctor h5 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+.card-doctor p {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* -------------------- BUTTONS -------------------- */
+.btn-primary {
+    background-color: #0d6efd;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.btn-success {
+    background-color: #198754;
+    border-radius: 50px;
+}
+.btn-success:hover {
+    background-color: #157347;
+    transform: translateY(-3px);
+}
+.btn-danger {
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+.btn-danger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* -------------------- FLASH MESSAGES -------------------- */
 .alert {
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: 500;
+    opacity: 0.95;
+    transition: all 0.3s ease;
+}
+.alert:hover {
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
-/* Footer or extra spacing */
-.mt-5 {
-    margin-top: 4rem !important;
+/* -------------------- RESPONSIVE -------------------- */
+@media (max-width: 768px) {
+    section.text-center h1 {
+        font-size: 2.2rem;
+    }
+    section.text-center p.lead {
+        font-size: 1.2rem;
+    }
+    .btn-lg {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-doctor {
+        margin-bottom: 20px;
+    }
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+/* Flatpickr input styling */
+.flatpickr-input {
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+.flatpickr-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 5px rgba(13,110,253,0.3);
 }
