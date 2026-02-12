@@ -1,32 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- DASHBOARD HERO -->
-<section class="text-center mb-5">
-    <h2 class="display-5 fw-bold">Welcome, {{ session['user_name'] }}</h2>
-    <p class="lead">Book appointments with top specialists in just a few clicks.</p>
-</section>
-
-<!-- DOCTOR CARDS -->
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for doc in doctors %}
-    <div class="col">
-      <div class="card-doctor">
-        <h5>{{ doc.name }}</h5>
-        <p>{{ doc.specialization }}</p>
-        {% if 'user_id' in session %}
-<a href="{{ url_for('book', doctor_id=doc.id) }}" class="btn btn-primary btn-sm mt-2">Book Appointment</a>
-        {% else %}
-          <a href="{{ url_for('login') }}" class="btn btn-secondary btn-sm">Login to Book</a>
-        {% endif %}
+<div class="container my-5">
+  <!-- DASHBOARD WIDGETS -->
+  <div class="row mb-4">
+    <!-- Upcoming Appointments -->
+    <div class="col-md-6">
+      <div class="card p-4 shadow-sm">
+        <h5 class="fw-bold">Upcoming Appointments</h5>
+        <ul class="list-group list-group-flush mt-3">
+          {% for appt in upcoming %}
+          <li class="list-group-item">
+            {{ appt.doctor.name }} - {{ appt.date }} at {{ appt.time }}
+          </li>
+          {% else %}
+          <li class="list-group-item text-muted">No upcoming appointments</li>
+          {% endfor %}
+        </ul>
+        <a href="{{ url_for('appointments') }}" class="btn btn-success btn-sm mt-3">View All</a>
       </div>
     </div>
-  {% endfor %}
-</div>
 
-<!-- QUICK LINKS -->
-<div class="mt-5 text-center">
-  <a href="{{ url_for('appointments') }}" class="btn btn-success btn-lg me-2 mb-2">My Appointments</a>
-  <a href="{{ url_for('logout') }}" class="btn btn-danger btn-lg mb-2">Logout</a>
+    <!-- Quick Actions -->
+    <div class="col-md-6">
+      <div class="card p-4 shadow-sm text-center">
+        <h5 class="fw-bold">Quick Actions</h5>
+        <p class="text-muted mb-3">Manage your appointments and book new doctors.</p>
+        <a href="{{ url_for('book') }}" class="btn btn-primary btn-sm me-2 mb-2">Book New Appointment</a>
+        <a href="{{ url_for('appointments') }}" class="btn btn-success btn-sm mb-2">View Appointments</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCTOR CARDS -->
+  <h3 class="mb-3">All Doctors</h3>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for doc in doctors %}
+    <div class="col">
+      <div class="card-doctor text-center p-3">
+        <h5>{{ doc.name }}</h5>
+        <p class="text-muted">{{ doc.specialization }}</p>
+        <a href="{{ url_for('book', doctor_id=doc.id) }}" class="btn btn-primary btn-sm mt-2">Book Appointment</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}
