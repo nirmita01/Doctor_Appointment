@@ -1,156 +1,199 @@
 /* -------------------- GENERAL -------------------- */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: #f8f7fc;
+    color: #444;
     margin: 0;
     padding: 0;
 }
 
 /* -------------------- NAVBAR -------------------- */
-.navbar-brand {
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    font-weight: 700;
-}
-.navbar-nav .nav-link {
-    font-weight: 500;
+.navbar {
+    background: #cbb5e5;   /* slightly deeper pastel lavender */
+    box-shadow: 0 6px 20px rgba(109, 89, 122, 0.15);
+    padding: 14px 25px;
     transition: 0.3s ease;
 }
-.navbar-nav .nav-link:hover {
-    color: #d134b4;
+
+/* Brand */
+.navbar-brand {
+    color: #5e548e !important;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-/* -------------------- HERO / INDEX -------------------- */
+/* Links */
+.navbar-nav .nav-link {
+    color: #4a4a4a !important;
+    font-weight: 500;
+    margin-left: 10px;
+    transition: 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #7b2cbf !important;
+}
+
+
+/* -------------------- HERO SECTION -------------------- */
 section.text-center {
-    background: linear-gradient(135deg, #0d6efd, #6c63ff);
-    color: white;
+    background: linear-gradient(135deg, #e6d6f5, #f9e7ef);
+    color: #5e548e;
     padding: 80px 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     margin-bottom: 50px;
 }
+
 section.text-center h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-weight: 700;
     margin-bottom: 20px;
 }
+
 section.text-center p.lead {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin-bottom: 30px;
 }
-.btn-lg {
-    padding: 0.8rem 2.2rem;
-    font-size: 1.2rem;
+
+/* -------------------- BUTTONS -------------------- */
+.btn {
     border-radius: 50px;
+    padding: 0.7rem 2rem;
+    font-weight: 500;
     transition: all 0.3s ease;
 }
-.btn-lg:hover {
+
+.btn-lg {
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background-color: #cdb4db;
+    border: none;
+    color: #4a4a4a;
+}
+
+.btn-primary:hover {
+    background-color: #b8a2cc;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.btn-success {
+    background-color: #b7e4c7;
+    border: none;
+    color: #355f3b;
+}
+
+.btn-success:hover {
+    background-color: #95d5b2;
+    transform: translateY(-3px);
+}
+
+.btn-danger {
+    background-color: #ffcad4;
+    border: none;
+    color: #7a2e3a;
+}
+
+.btn-danger:hover {
+    background-color: #f4a6b5;
+    transform: translateY(-3px);
 }
 
 /* -------------------- FORMS -------------------- */
 form {
-    background: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
 }
+
 form:hover {
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
+
 input, select {
-    border-radius: 8px;
+    border-radius: 12px !important;
+    border: 1px solid #e0d4f7 !important;
+    padding: 10px;
+}
+
+input:focus, select:focus {
+    border-color: #cdb4db !important;
+    box-shadow: 0 0 6px rgba(205,180,219,0.4) !important;
 }
 
 /* -------------------- TABLES -------------------- */
 .table {
-    background: #fff;
-    border-radius: 12px;
+    background: #ffffff;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
 }
+
 .table th {
-    background-color: #0d6efd;
-    color: #fff;
+    background-color: #e6d6f5;
+    color: #5e548e;
     text-align: center;
 }
+
 .table td {
     text-align: center;
 }
+
 .table tr:hover {
-    background-color: #e9f2ff;
-    transform: scale(1.01);
+    background-color: #f3e8ff;
 }
 
-/* -------------------- DASHBOARD / DOCTOR CARDS -------------------- */
+/* -------------------- DOCTOR CARDS -------------------- */
 .card-doctor {
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
     transition: 0.3s ease;
-    padding: 25px;
+    padding: 30px;
     text-align: center;
     margin-bottom: 25px;
 }
+
 .card-doctor:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-}
-.card-doctor h5 {
-    font-weight: 600;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-}
-.card-doctor p {
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 15px;
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
-/* -------------------- BUTTONS -------------------- */
-.btn-primary {
-    background-color: #0d6efd;
-    border-radius: 50px;
-    transition: 0.3s;
+.card-doctor h5 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #6d597a;
 }
-.btn-primary:hover {
-    background-color: #0b5ed7;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-.btn-success {
-    background-color: #198754;
-    border-radius: 50px;
-}
-.btn-success:hover {
-    background-color: #157347;
-    transform: translateY(-3px);
-}
-.btn-danger {
-    border-radius: 50px;
-    transition: all 0.3s;
-}
-.btn-danger:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+.card-doctor p {
+    font-weight: 500;
+    color: #777;
 }
 
 /* -------------------- FLASH MESSAGES -------------------- */
 .alert {
-    font-size: 1rem;
     border-radius: 20px;
     text-align: center;
     font-weight: 500;
     opacity: 0.95;
-    transition: all 0.3s ease;
 }
-.alert:hover {
-    opacity: 1;
-    transform: translateY(-2px);
+
+/* -------------------- FLATPICKR -------------------- */
+.flatpickr-input {
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #e0d4f7;
+    width: 100%;
+}
+
+.flatpickr-input:focus {
+    border-color: #cdb4db;
+    box-shadow: 0 0 6px rgba(205,180,219,0.4);
 }
 
 /* -------------------- RESPONSIVE -------------------- */
@@ -158,35 +201,13 @@ input, select {
     section.text-center h1 {
         font-size: 2.2rem;
     }
+
     section.text-center p.lead {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
+
     .btn-lg {
         width: 100%;
         margin-bottom: 10px;
     }
-    .table-responsive {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .card-doctor {
-        margin-bottom: 20px;
-    }
-    .navbar-nav {
-        text-align: center;
-    }
-}
-
-/* Flatpickr input styling */
-.flatpickr-input {
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    border: 1px solid #ccc;
-    width: 100%;
-}
-.flatpickr-input:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 5px rgba(13,110,253,0.3);
 }
