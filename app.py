@@ -66,7 +66,8 @@ def register():
 def login():
     if 'user_id' in session:
         if session.get('is_admin'):
-            return redirect('/admin')
+         return redirect(url_for('admin_dashboard'))
+
         else:
             return redirect(url_for('dashboard'))
 
@@ -84,14 +85,14 @@ def login():
             if role == 'user' and user.is_admin:
                 flash("Please select Admin login for this account.", "warning")
                 return redirect(url_for('login'))
-
+            
             # Set session
             session['user_id'] = user.id
             session['user_name'] = user.name
             session['is_admin'] = user.is_admin
 
             flash(f"Welcome, {user.name}!", "success")
-            return redirect('/admin' if user.is_admin else url_for('dashboard'))
+            return redirect(url_for('admin_dashboard') if user.is_admin else url_for('dashboard'))
         else:
             flash('Invalid credentials', 'danger')
             return redirect(url_for('login'))
@@ -116,6 +117,27 @@ def dashboard():
 
     doctors = Doctor.query.all()
     return render_template('dashboard.html', doctors=doctors)
+
+# ---------------- Admin Dashboard ----------------
+@app.route('/admin/dashboard')
+def admin_dashboard():
+    if not session.get('is_admin'):
+        return redirect(url_for('login'))
+
+    total_doctors = Doctor.query.count()
+    total_patients = User.query.filter_by(is_admin=False).count()
+    total_appointments = Appointment.query.count()
+
+    upcoming_appointments = Appointment.query.order_by(Appointment.date).limit(5).all()
+
+    return render_template(
+        'admin_dashboard.html',
+        total_doctors=total_doctors,
+        total_patients=total_patients,
+        total_appointments=total_appointments,
+        upcoming_appointments=upcoming_appointments
+    )
+
 
 
 # ---------------- Book Appointment ----------------
