@@ -35,27 +35,55 @@ body {
 }
 
 
-/* -------------------- HERO SECTION -------------------- */
-section.text-center {
-    background: linear-gradient(135deg, #e6d6f5, #f9e7ef);
-    color: #5e548e;
-    padding: 80px 20px;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    margin-bottom: 50px;
+/* -------------------- HERO SECTION WITH BACKGROUND IMAGE -------------------- */
+.hero-section-quote {
+    height: 80vh; 
+    background: url('../assets/hero-bg.jpg') center center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-section.text-center h1 {
+.hero-section-quote .overlay {
+    background: rgba(0, 0, 0, 0.5); 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    border-radius: 0; 
+}
+
+.hero-section-quote h1,
+.hero-section-quote p {
+    color: #fff;
+}
+
+.hero-section-quote h1 {
     font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 20px;
 }
 
-section.text-center p.lead {
-    font-size: 1.4rem;
-    margin-bottom: 30px;
+.hero-section-quote p {
+    font-size: 1.5rem;
+    margin-top: 15px;
 }
 
+.hero-section-quote a.btn {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .hero-section-quote h1 {
+        font-size: 2rem;
+    }
+    .hero-section-quote p {
+        font-size: 1rem;
+    }
+}
 /* -------------------- BUTTONS -------------------- */
 .btn {
     border-radius: 50px;

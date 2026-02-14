@@ -138,6 +138,29 @@ def admin_dashboard():
         upcoming_appointments=upcoming_appointments
     )
 
+# ---------------- Admin: View Doctors ----------------
+@app.route('/admin/doctors')
+def admin_doctors():
+    if not session.get('is_admin'):
+        return redirect(url_for('login'))
+    doctors = Doctor.query.all()
+    return render_template('admin_doctors.html', doctors=doctors)
+
+# ---------------- Admin: View Patients ----------------
+@app.route('/admin/patients')
+def admin_patients():
+    if not session.get('is_admin'):
+        return redirect(url_for('login'))
+    patients = User.query.filter_by(is_admin=False).all()
+    return render_template('admin_patients.html', patients=patients)
+
+# ---------------- Admin: View Appointments ----------------
+@app.route('/admin/appointments')
+def admin_appointments():
+    if not session.get('is_admin'):
+        return redirect(url_for('login'))
+    appointments = Appointment.query.order_by(Appointment.date).all()
+    return render_template('admin_appointments.html', appointments=appointments)
 
 
 # ---------------- Book Appointment ----------------

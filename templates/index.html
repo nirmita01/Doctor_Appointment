@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- HERO SECTION -->
-<section class="text-center mt-5 hero-section py-5">
-  <div class="container">
-    {% if 'user_id' in session %}
-      <h1 class="display-4 fw-bold">Welcome, {{ session['user_name'] }}!</h1>
-      <p class="lead mb-4">Book appointments with top specialists in just a few clicks.</p>
-    {% else %}
-      <h1 class="display-4 fw-bold">Welcome to Doctor Appointment</h1>
-      <p class="lead mb-4">Fast, secure, and reliable online doctor appointment system.</p>
-      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2 mb-2">Login</a>
-      <a href="{{ url_for('register') }}" class="btn btn-secondary btn-lg mb-2">Register</a>
-    {% endif %}
+
+<!-- HERO SECTION WITH BACKGROUND IMAGE -->
+<section class="hero-section-quote d-flex align-items-center justify-content-center">
+  <div class="overlay text-center">
+    <div class="container">
+      {% if 'user_id' in session %}
+        <h1 class="display-4 fw-bold text-white">"Health is Wealth. Take care of it."</h1>
+        <p class="lead text-white mt-3">Welcome back, {{ session['user_name'] }}!</p>
+      {% else %}
+        <h1 class="display-4 fw-bold text-white">"Health is Wealth. Take care of it."</h1>
+        <p class="lead text-white mt-3">Fast, secure, and reliable online doctor appointment system.</p>
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2 mt-3">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary btn-lg mt-3">Register</a>
+      {% endif %}
+    </div>
   </div>
 </section>
 
@@ -21,7 +24,7 @@
   <div class="container">
     <h2 class="text-center mb-4">Featured Specialists</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      {% for doc in doctors[:4] %} <!-- show only top 4 doctors -->
+      {% for doc in doctors[:4] %}
       <div class="col">
         <div class="card-doctor text-center p-4">
           <div class="mb-3">
