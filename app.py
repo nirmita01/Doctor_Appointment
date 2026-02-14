@@ -2,24 +2,40 @@ from flask import Flask, render_template, redirect, url_for, flash, session, req
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Doctor, Appointment
 from config import Config
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
 
-# Create tables
+# ---------------- Create Tables ----------------
 with app.app_context():
     db.create_all()
 
+# ---------------- Flask-Admin ----------------
+class AdminModelView(ModelView):
+    def is_accessible(self):
+        return session.get('is_admin')
 
-# ----------------- Home -----------------
+    def inaccessible_callback(self, name, **kwargs):
+        flash("Admins only!", "danger")
+        return redirect(url_for('login'))
+
+admin = Admin(app, name="Doctor System", template_mode='bootstrap3')
+admin.add_view(AdminModelView(User, db.session))
+admin.add_view(AdminModelView(Doctor, db.session))
+admin.add_view(AdminModelView(Appointment, db.session))
+
+
+# ---------------- Home ----------------
 @app.route('/')
 def home():
     doctors = Doctor.query.all()
     return render_template('index.html', doctors=doctors)
 
 
-# ----------------- Register -----------------
+# ---------------- Register ----------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if 'user_id' in session:
@@ -30,15 +46,11 @@ def register():
         email = request.form['email']
         password = request.form['password']
 
-        # Check if user already exists
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
+        if User.query.filter_by(email=email).first():
             flash('Email already registered', 'danger')
             return redirect(url_for('register'))
 
-        # Hash password with PBKDF2-SHA256 to avoid scrypt issue
         hashed_pw = generate_password_hash(password, method='pbkdf2:sha256', salt_length=16)
-
         user = User(name=name, email=email, password=hashed_pw)
         db.session.add(user)
         db.session.commit()
@@ -49,22 +61,37 @@ def register():
     return render_template('register.html')
 
 
-# ----------------- Login -----------------
+# ---------------- Login ----------------
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user_id' in session:
-        return redirect(url_for('dashboard'))
+        if session.get('is_admin'):
+            return redirect('/admin')
+        else:
+            return redirect(url_for('dashboard'))
 
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        role = request.form.get('role', 'user')  # Default to user
 
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
+            # Check role
+            if role == 'admin' and not user.is_admin:
+                flash("This account is not an admin.", "danger")
+                return redirect(url_for('login'))
+            if role == 'user' and user.is_admin:
+                flash("Please select Admin login for this account.", "warning")
+                return redirect(url_for('login'))
+
+            # Set session
             session['user_id'] = user.id
             session['user_name'] = user.name
-            flash(f'Welcome, {user.name}!', 'success')
-            return redirect(url_for('dashboard'))
+            session['is_admin'] = user.is_admin
+
+            flash(f"Welcome, {user.name}!", "success")
+            return redirect('/admin' if user.is_admin else url_for('dashboard'))
         else:
             flash('Invalid credentials', 'danger')
             return redirect(url_for('login'))
@@ -72,7 +99,7 @@ def login():
     return render_template('login.html')
 
 
-# ----------------- Logout -----------------
+# ---------------- Logout ----------------
 @app.route('/logout')
 def logout():
     session.clear()
@@ -80,7 +107,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-# ----------------- Dashboard -----------------
+# ---------------- Dashboard ----------------
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
@@ -91,7 +118,7 @@ def dashboard():
     return render_template('dashboard.html', doctors=doctors)
 
 
-# ----------------- Book Appointment -----------------
+# ---------------- Book Appointment ----------------
 @app.route('/book', methods=['GET', 'POST'])
 def book():
     if 'user_id' not in session:
@@ -99,8 +126,6 @@ def book():
         return redirect(url_for('login'))
 
     doctors = Doctor.query.all()
-
-    # Get doctor_id from URL query parameter (if any)
     preselected_doctor_id = request.args.get('doctor_id', type=int)
 
     if request.method == 'POST':
@@ -112,9 +137,7 @@ def book():
             flash("Please fill all fields.", "danger")
             return redirect(request.url)
 
-        # Check if slot is already booked
-        existing = Appointment.query.filter_by(doctor_id=doctor_id, date=date, time=time).first()
-        if existing:
+        if Appointment.query.filter_by(doctor_id=doctor_id, date=date, time=time).first():
             flash("This time slot is already booked. Please choose another.", "danger")
             return redirect(request.url)
 
@@ -132,7 +155,7 @@ def book():
     return render_template('book_appointment.html', doctors=doctors, preselected_doctor_id=preselected_doctor_id)
 
 
-# ----------------- View Appointments -----------------
+# ---------------- View Appointments ----------------
 @app.route('/appointments')
 def appointments():
     if 'user_id' not in session:
@@ -143,7 +166,7 @@ def appointments():
     return render_template('appointments.html', appointments=user_appts)
 
 
-# ----------------- Edit Appointment -----------------
+# ---------------- Edit Appointment ----------------
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_appointment(id):
     if 'user_id' not in session:
@@ -162,7 +185,7 @@ def edit_appointment(id):
     return render_template('edit_appointment.html', appt=appt)
 
 
-# ----------------- Delete Appointment -----------------
+# ---------------- Delete Appointment ----------------
 @app.route('/delete/<int:id>')
 def delete_appointment(id):
     if 'user_id' not in session:
@@ -176,6 +199,6 @@ def delete_appointment(id):
     return redirect(url_for('appointments'))
 
 
-# ----------------- Run App -----------------
+# ---------------- Run App ----------------
 if __name__ == "__main__":
     app.run(debug=True)

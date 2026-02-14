@@ -7,6 +7,7 @@ class User(db.Model):
     name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(200))
+    is_admin = db.Column(db.Boolean, default=False)
     appointments = db.relationship('Appointment', backref='patient', lazy=True)
 
 class Doctor(db.Model):
