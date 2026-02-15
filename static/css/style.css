@@ -1,7 +1,7 @@
 /* -------------------- GENERAL -------------------- */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f7fc;
+    background-color: #eae8f0;
     color: #444;
     margin: 0;
     padding: 90px;
@@ -9,7 +9,7 @@ body {
 
 /* -------------------- NAVBAR -------------------- */
 .navbar {
-    background: #cbb5e5;   /* slightly deeper pastel lavender */
+    background: #cbb5e5;   
     box-shadow: 0 6px 20px rgba(109, 89, 122, 0.15);
     padding: 14px 25px;
     transition: 0.3s ease;

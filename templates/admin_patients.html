@@ -1,20 +1,52 @@
 {% extends 'admin_base.html' %}
 
 {% block content %}
-<div class="container my-4">
-    <h2>Patients</h2>
-    {% for patient in patients %}
-    <div class="card mb-3 p-3 shadow-sm">
-        <h5>{{ patient.name }} - {{ patient.email }}</h5>
-        <p><strong>Appointments:</strong></p>
-        <ul>
-            {% for appt in patient.appointments %}
-            <li>With {{ appt.doctor.name }} - {{ appt.date }} at {{ appt.time }}</li>
-            {% else %}
-            <li>No appointments yet</li>
-            {% endfor %}
-        </ul>
+<div class="container-fluid my-4">
+
+    <h2 class="mb-4">Patients</h2>
+
+    <div class="row">
+        {% for patient in patients %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        {{ patient.name }}
+                    </h5>
+
+                    <p class="text-muted mb-2">
+                        {{ patient.email }}
+                    </p>
+
+                    <hr>
+
+                    <p class="fw-bold mb-2">Appointments:</p>
+
+                    <div style="max-height: 150px; overflow-y: auto;">
+                        <ul class="list-group list-group-flush">
+                            {% for appt in patient.appointments %}
+                            <li class="list-group-item px-0">
+                                <small>
+                                    With {{ appt.doctor.name }} <br>
+                                    {{ appt.date }} at {{ appt.time }}
+                                </small>
+                            </li>
+                            {% else %}
+                            <li class="list-group-item px-0 text-muted">
+                                No appointments yet
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+
 </div>
 {% endblock %}

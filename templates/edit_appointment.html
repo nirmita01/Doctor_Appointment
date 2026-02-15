@@ -1,21 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <h2>Edit Appointment</h2>
-    <form method="POST">
-      <div class="mb-3">
-        <label>Date</label>
-        <input type="date" class="form-control" name="date" value="{{ appt.date }}" required>
-      </div>
-      <div class="mb-3">
-        <label>Time</label>
-        <input type="time" class="form-control" name="time" value="{{ appt.time }}" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Update</button>
-      <a class="btn btn-secondary" href="{{ url_for('appointments') }}">Cancel</a>
-    </form>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-5">
+
+      <h2 class="mb-4 text-center">Edit Appointment</h2>
+
+      <form method="POST">
+
+        <!-- DATE -->
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" id="date" class="form-control" name="date" value="{{ appt.date }}" required>
+        </div>
+
+        <!-- TIME -->
+        <div class="mb-3">
+          <label for="time" class="form-label">Time</label>
+          <input type="time" id="time" class="form-control" name="time" value="{{ appt.time }}" required>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="d-flex flex-column flex-sm-row justify-content-between gap-2">
+          <button type="submit" class="btn btn-primary w-100 w-sm-auto">Update</button>
+          <a href="{{ url_for('appointments') }}" class="btn btn-secondary w-100 w-sm-auto">Cancel</a>
+        </div>
+
+      </form>
+
+    </div>
   </div>
 </div>
 {% endblock %}
